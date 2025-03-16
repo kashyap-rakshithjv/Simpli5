@@ -4,7 +4,7 @@ from langchain import LLMChain, PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 import os
-os.environ['GOOGLE_API_KEY']  = "AIzaSyAHKH8ypLMmST25bhmZ8zar_03QuBBoGIk"
+os.environ['GOOGLE_API_KEY']  = st.secrets['GOOGLE_API_KEY']
 
 # Define the prompt template
 simplify_prompt = PromptTemplate(
