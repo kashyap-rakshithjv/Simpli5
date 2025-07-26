@@ -18,7 +18,7 @@ simplify_prompt = PromptTemplate(
 )
 
 # Initialize the LLM
-gemini_model = ChatGoogleGenerativeAI(model="gemini-1.5-pro-002")
+gemini_model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
 # Create the chain
 simplify_chain = LLMChain(llm=gemini_model, prompt=simplify_prompt)
