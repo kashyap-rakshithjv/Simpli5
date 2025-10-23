@@ -5,7 +5,7 @@ from langchain.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 import os
-os.environ['GOOGLE_API_KEY']  = st.secrets['GOOGLE_API_KEY']
+os.environ['GOOGLE_API_KEY']  = "AIzaSyAHKH8ypLMmST25bhmZ8zar_03QuBBoGIk"
 
 # Define the prompt template
 simplify_prompt = PromptTemplate(
@@ -37,4 +37,3 @@ if st.button("Simplify"):
         st.write(simplified_explanation)
     else:
         st.warning("Please enter a topic before clicking Simplify!")
-
