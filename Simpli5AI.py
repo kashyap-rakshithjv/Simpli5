@@ -1,36 +1,37 @@
 import streamlit as st
-from langchain_google_genai import ChatGoogleGenerativeAI
-
+import google.generativeai as genai
 import os
-os.environ['GOOGLE_API_KEY'] = "AIzaSyAHKH8ypLMmST25bhmZ8zar_03QuBBoGIk"
 
-# Initialize the LLM
-gemini_model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+# --- CONFIGURATION ---
+# You can either set the key here or in Streamlit Cloud Secrets
+# os.environ["GOOGLE_API_KEY"] = "your-api-key-here"
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
-# Streamlit UI
-st.title("Simpli5 AI")
-st.write("Enter a complex topic, and I'll simplify it like how I'd do it for a 5-year-old!")
+# --- APP UI ---
+st.set_page_config(page_title="Simpli5 AI", page_icon="✨", layout="centered")
 
+st.title("🧠 Simpli5 AI")
+st.write("Enter a complex topic, and I'll explain it simply — like you're 5 years old!")
+
+# --- INPUT ---
 topic = st.text_input("Enter a topic:")
 
-if st.button("Simplify"):
-    if topic:
-        # Create the prompt manually
-        prompt = f"""
-        Explain the following topic in a simple way as if you were teaching a ten-year-old.
-        Use easy words, short sentences, and fun examples to make it engaging.
+# --- MODEL INITIALIZATION ---
+model = genai.GenerativeModel("gemini-2.5-flash")
 
-        Topic: {topic}
-        """
-        
-        # Format the prompt as a list of messages
-        messages = [{"role": "user", "content": prompt}]
-        
-        # Use the correct method to generate a response
-        response = gemini_model.generate(messages)
-        
-        # Display the simplified explanation
-        st.subheader("Here's your simplified explanation:")
-        st.write(response)
-    else:
+# --- BUTTON ACTION ---
+if st.button("Simplify"):
+    if topic.strip() == "":
         st.warning("Please enter a topic before clicking Simplify!")
+    else:
+        with st.spinner("Thinking..."):
+            prompt = f"""
+            Explain the following topic in a simple and fun way as if you were teaching a five-year-old.
+            Use short sentences, easy words, and engaging examples.
+
+            Topic: {topic}
+            """
+            response = model.generate_content(prompt)
+
+            st.subheader("Here's your simplified explanation:")
+            st.write(response.text)
