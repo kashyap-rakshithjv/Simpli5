@@ -10,7 +10,7 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 # --- APP UI ---
 st.set_page_config(page_title="Simpli5 AI", page_icon="✨", layout="centered")
 
-st.title("🧠 Simpli5 AI")
+st.title("Simpli5 AI")
 st.write("Enter a complex topic, and I'll explain it simply — like you're 5 years old!")
 
 # --- INPUT ---
@@ -35,3 +35,4 @@ if st.button("Simplify"):
 
             st.subheader("Here's your simplified explanation:")
             st.write(response.text)
+
