@@ -1,7 +1,7 @@
 import streamlit as st
 
-from langchain.chains import LLMChain
-from langchain.prompts import PromptTemplate
+from langchain import LLMChain
+from langchain import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 import os
@@ -37,3 +37,4 @@ if st.button("Simplify"):
         st.write(simplified_explanation)
     else:
         st.warning("Please enter a topic before clicking Simplify!")
+
